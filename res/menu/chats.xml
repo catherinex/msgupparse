@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.parse.starter.ChatsActivity" >
+
+    <item
+        android:id="@+id/action_new_chat"
+        android:orderInCategory="100"
+        android:title="New chat"/>
+    
+    <item
+        android:id="@+id/action_new_group"
+        android:orderInCategory="100"
+        android:title="New group"/>
+    
+    <item 
+        android:id="@+id/action_new_contact"
+        android:title="New contact"/>
+
+</menu>
