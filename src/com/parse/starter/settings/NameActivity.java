@@ -1,17 +1,32 @@
 package com.parse.starter.settings;
 
+import com.parse.starter.GlobalData;
 import com.parse.starter.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class NameActivity extends Activity {
+	
+	private EditText etName;
+	private Button btnCancel, btnOk;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_name);
+		
+		String name = GlobalData.currentUser.getString("nickname");
+		
+		etName = (EditText)findViewById(R.id.et_name);
+		btnCancel = (Button)findViewById(R.id.btn_name_cancel);
+		btnOk = (Button)findViewById(R.id.btn_name_ok);
+		
+		if (name != null)
+			etName.setText(name);
 	}
 
 	@Override

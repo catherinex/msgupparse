@@ -1,6 +1,7 @@
 package com.parse.starter.settings;
 
 import com.parse.ParseUser;
+import com.parse.starter.GlobalData;
 import com.parse.starter.R;
 
 import android.app.Activity;
