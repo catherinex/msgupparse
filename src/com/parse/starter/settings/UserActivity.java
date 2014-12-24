@@ -1,16 +1,13 @@
 package com.parse.starter.settings;
 
 import com.parse.starter.R;
-import com.parse.starter.R.id;
-import com.parse.starter.R.layout;
-import com.parse.starter.R.menu;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class UserActivity extends ActionBarActivity {
+public class UserActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

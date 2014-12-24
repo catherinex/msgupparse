@@ -1,5 +1,7 @@
 package com.parse.starter;
 
+import com.parse.starter.settings.UserActivity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +35,10 @@ public class ChatsActivity extends Activity {
 			return true;
 		} else if (id == R.id.action_new_contact) {
 			Intent intent = new Intent(getApplicationContext(), ContactsActivity.class);
+			startActivity(intent);
+			return true;
+		} else if (id == R.id.action_settings) {
+			Intent intent = new Intent(getApplicationContext(), UserActivity.class);
 			startActivity(intent);
 			return true;
 		}
