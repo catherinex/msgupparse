@@ -6,11 +6,56 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.parse.starter.UserActivity" >
+    tools:context="com.parse.starter.settings.UserActivity" >
 
-    <TextView
+    
+    <ImageView 
+        android:id="@+id/iv_user_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/default_photo"
+        android:scaleType="center"/>
+    
+    <ImageView
+        android:id="@+id/iv_user_edit_icon"
+        android:padding="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignBottom="@+id/iv_user_icon"
+        android:layout_alignRight="@+id/iv_user_icon"
+        android:src="@drawable/ic_action_search" />
+    
+
+    
+    <EditText 
+        android:id="@+id/et_user_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_user_icon"
+        android:enabled="false"
+        android:layout_marginTop="10dp"/>
+    
+    <ImageView
+        android:id="@+id/iv_user_edit_nickname"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/et_user_nickname"
+        android:layout_alignRight="@+id/et_user_nickname"
+        android:src="@drawable/ic_action_search" />
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_user_nickname"
+        android:layout_marginTop="10dp"
+        android:text="This is not your username. This name will be visible to your MsgUpParse contacts."/>
+    
+    <Button 
+        android:id="@+id/btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Start to Chat!"/>
 
 </RelativeLayout>

@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="13"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -45,7 +45,7 @@
             android:label="@string/title_activity_contacts" >
         </activity>
         <activity
-            android:name=".UserActivity"
+            android:name="com.parse.starter.settings.UserActivity"
             android:label="@string/title_activity_user" >
         </activity>
     </application>
