@@ -1,4 +1,9 @@
-package com.parse.starter;
+package com.parse.starter.settings;
+
+import com.parse.starter.R;
+import com.parse.starter.R.id;
+import com.parse.starter.R.layout;
+import com.parse.starter.R.menu;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
