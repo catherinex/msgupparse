@@ -45,8 +45,12 @@
             android:label="@string/title_activity_contacts" >
         </activity>
         <activity
-            android:name="com.parse.starter.settings.UserActivity"
+            android:name=".settings.UserActivity"
             android:label="@string/title_activity_user" >
+        </activity>
+        <activity
+            android:name="com.parse.starter.settings.NameActivity"
+            android:label="@string/title_activity_name" >
         </activity>
     </application>
 
