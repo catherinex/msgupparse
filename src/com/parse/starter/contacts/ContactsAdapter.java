@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,7 +60,6 @@ public class ContactsAdapter extends ArrayAdapter<ParseUser> {
 	
 	private void setupItem(final ContactHolder holder) {
 		holder.name.setText(holder.contact.getUsername());
-		
 	}
 
 }

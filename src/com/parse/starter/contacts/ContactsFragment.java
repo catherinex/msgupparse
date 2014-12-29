@@ -5,7 +5,7 @@ import java.util.List;
 import com.parse.ParseUser;
 
 import com.parse.starter.R;
-import com.parse.starter.UserActivity;
+import com.parse.starter.settings.UserActivity;
 
 import android.app.ListFragment;
 import android.content.Context;
@@ -44,7 +44,7 @@ public class ContactsFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		ParseUser user = (ParseUser)l.getItemAtPosition(position);
-		Intent intent = new Intent(context, UserActivity.class);
+		Intent intent = new Intent(context, ContactActivity.class);
 		//intent.putExtra(", value)
 		startActivity(intent);
 	}

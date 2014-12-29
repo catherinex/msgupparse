@@ -13,10 +13,15 @@
         android:orderInCategory="101"
         android:title="New group"/>
     
-    <item 
+    <!--  <item 
         android:id="@+id/action_new_contact"
         android:orderInCategory="102"
-        android:title="New contact"/>
+        android:title="New contact"/>-->
+        
+    <item
+        android:id="@+id/action_contacts"
+        android:orderInCategory="102"
+        android:title="Contacts" />
     
     <item 
         android:id="@+id/action_settings"

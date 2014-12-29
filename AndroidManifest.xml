@@ -53,8 +53,12 @@
             android:label="@string/title_activity_name" >
         </activity>
         <activity
-            android:name=".UserContactsActivity"
+            android:name=".contacts.UserContactsActivity"
             android:label="@string/title_activity_user_contacts" >
+        </activity>
+        <activity
+            android:name="com.parse.starter.contacts.ContactActivity"
+            android:label="@string/title_activity_contact" >
         </activity>
     </application>
 
