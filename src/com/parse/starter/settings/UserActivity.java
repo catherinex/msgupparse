@@ -1,3 +1,7 @@
+/*
+ * Profile
+ */
+
 package com.parse.starter.settings;
 
 import com.parse.ParseUser;
@@ -12,6 +16,7 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -19,6 +24,7 @@ public class UserActivity extends Activity {
 	
 	private ImageView ivIcon, ivEditIcon, ivEditNickname;
 	private EditText etNickname;
+	private Button btnStart;
 	private static final int SELECT_PHOTO = 100;
 
 	@Override
@@ -26,12 +32,15 @@ public class UserActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user);
 		
+		int isVisible = getIntent().getIntExtra("is_visible", View.INVISIBLE);
+		
 		ParseUser user = ParseUser.getCurrentUser();
 		
 		ivIcon = (ImageView)findViewById(R.id.iv_user_icon);
 		ivEditIcon = (ImageView)findViewById(R.id.iv_user_edit_icon);
 		ivEditNickname = (ImageView)findViewById(R.id.iv_user_edit_nickname);
 		etNickname = (EditText)findViewById(R.id.et_user_nickname);
+		btnStart = (Button)findViewById(R.id.btn_start);
 		
 		// set widgets
 		Display display = getWindowManager().getDefaultDisplay();
@@ -42,6 +51,7 @@ public class UserActivity extends Activity {
 		ivIcon.getLayoutParams().height = width - 16 - 16;
 		if (user.getString("nickname") != null)
 			etNickname.setText(user.getString("nickname"));
+		btnStart.setVisibility(isVisible);
 		
 		// widgets actions
 		ivEditIcon.setOnClickListener(new View.OnClickListener() {
