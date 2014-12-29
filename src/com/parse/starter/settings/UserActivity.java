@@ -34,7 +34,7 @@ public class UserActivity extends Activity {
 		
 		int isVisible = getIntent().getIntExtra("is_visible", View.INVISIBLE);
 		
-		ParseUser user = ParseUser.getCurrentUser();
+		
 		
 		ivIcon = (ImageView)findViewById(R.id.iv_user_icon);
 		ivEditIcon = (ImageView)findViewById(R.id.iv_user_edit_icon);
@@ -48,9 +48,7 @@ public class UserActivity extends Activity {
 		display.getSize(size);
 		int width = size.x;
 		int height = size.y;
-		ivIcon.getLayoutParams().height = width - 16 - 16;
-		if (user.getString("nickname") != null)
-			etNickname.setText(user.getString("nickname"));
+		ivIcon.getLayoutParams().height = width - 16 - 16;		
 		btnStart.setVisibility(isVisible);
 		
 		// widgets actions
@@ -80,6 +78,14 @@ public class UserActivity extends Activity {
 	private void onClickNameEditButton() {
 		Intent intent = new Intent(this, NameActivity.class);
 		startActivity(intent);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		ParseUser user = ParseUser.getCurrentUser();
+		if (user.getString("nickname") != null)
+			etNickname.setText(user.getString("nickname"));
 	}
 
 	@Override
