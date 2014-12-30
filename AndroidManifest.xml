@@ -57,8 +57,16 @@
             android:label="@string/title_activity_user_contacts" >
         </activity>
         <activity
-            android:name="com.parse.starter.contacts.ContactActivity"
+            android:name=".contacts.ContactActivity"
             android:label="@string/title_activity_contact" >
+        </activity>
+        <activity
+            android:name=".status.StatusActivity"
+            android:label="@string/title_activity_status" >
+        </activity>
+        <activity
+            android:name=".NewStatusActivity"
+            android:label="@string/title_activity_new_status" >
         </activity>
     </application>
 

@@ -45,7 +45,7 @@ public class ContactsFragment extends ListFragment {
 		super.onListItemClick(l, v, position, id);
 		ParseUser user = (ParseUser)l.getItemAtPosition(position);
 		Intent intent = new Intent(context, ContactActivity.class);
-		//intent.putExtra(", value)
+		intent.putExtra("contact", user.getObjectId());
 		startActivity(intent);
 	}
 }

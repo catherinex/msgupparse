@@ -42,7 +42,8 @@ public class SignupActivity extends Activity {
 				ParseUser user = new ParseUser();
 				user.setUsername(etUsername.getText().toString());
 				user.setPassword(etPassword.getText().toString());
-				user.setEmail(etEmail.getText().toString());
+				user.setEmail(etEmail.getText().toString());				
+				user.put("status", "Hey there! I am using MsgUp.");
 				 
 				user.signUpInBackground(new SignUpCallback() {
 				  public void done(ParseException e) {

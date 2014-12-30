@@ -4,6 +4,13 @@
 
 package com.parse.starter.contacts;
 
+import java.util.List;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
+import com.parse.ParseUser;
 import com.parse.starter.ContactsActivity;
 import com.parse.starter.R;
 import com.parse.starter.R.id;
@@ -12,6 +19,8 @@ import com.parse.starter.R.menu;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,18 +31,53 @@ import android.widget.Button;
 public class UserContactsActivity extends Activity {
 	
 	private Button btnAdd;
+	private List<ParseUser> contacts;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_user_contacts);
 		
 		int isVisible = getIntent().getIntExtra("is_visible", View.INVISIBLE);
 		String title = getIntent().getStringExtra("title");
 		
-		setContentView(R.layout.activity_user_contacts);
-		ActionBar actionBar = getActionBar();
+		final ActionBar actionBar = getActionBar();
 		actionBar.setTitle(title);
-		//actionBar.setSubtitle("64 contacts");
+				
+		ParseUser currentUser = ParseUser.getCurrentUser();
+		ParseRelation<ParseUser> relation = currentUser.getRelation("contacts");
+		ParseQuery<ParseUser> query = relation.getQuery();
+		query.findInBackground(new FindCallback<ParseUser>() {
+
+			@Override
+			public void done(List<ParseUser> objects, ParseException e) {
+				if (e == null) {
+					contacts = objects;
+					String subtitle = "0 contact";
+					if (contacts != null && contacts.size() > 0) {
+						if (contacts.size() == 1)
+							subtitle = "1 contact";
+						else
+							subtitle = Integer.toString(contacts.size()) + " contacts";
+					}
+					actionBar.setSubtitle(subtitle);
+					
+					// load fragment
+					Fragment newFrg = new ContactsFragment().newInstance(getApplicationContext(), objects);
+		        	Fragment frg = getFragmentManager().findFragmentByTag("fragment_user_contacts");
+		        	FragmentTransaction ft = getFragmentManager().beginTransaction();
+		        	if (frg != null)
+						ft.remove(frg);
+		        	ft.add(R.id.container_user_contacts, newFrg, "fragment_user_contacts").commit();
+				}
+					
+			}
+			
+		});
+		
+		
+		
+		
 		
 		btnAdd = (Button)findViewById(R.id.btn_contacts_add);
 		

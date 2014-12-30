@@ -17,5 +17,7 @@
     <string name="title_activity_name">Enter your name</string>
     <string name="title_activity_user_contacts">Select contact</string>
     <string name="title_activity_contact">Contact info</string>
+    <string name="title_activity_status">Status</string>
+    <string name="title_activity_new_status">Add new status</string>
 
 </resources>

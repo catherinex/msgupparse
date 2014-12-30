@@ -1,12 +1,15 @@
 package com.parse.starter;
 
+import com.parse.starter.contacts.UserContactsActivity;
 import com.parse.starter.settings.UserActivity;
+import com.parse.starter.status.StatusActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class ChatsActivity extends Activity {
 
@@ -30,15 +33,22 @@ public class ChatsActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_new_chat) {
-			Intent intent = new Intent(getApplicationContext(), ContactsActivity.class);
+			Intent intent = new Intent(getApplicationContext(), UserContactsActivity.class);
+			intent.putExtra("title", "Select contact");
 			startActivity(intent);
 			return true;
-		} else if (id == R.id.action_new_contact) {
-			Intent intent = new Intent(getApplicationContext(), ContactsActivity.class);
+		} else if (id == R.id.action_contacts) {
+			Intent intent = new Intent(getApplicationContext(), UserContactsActivity.class);
+			intent.putExtra("is_visible", View.VISIBLE);
+			intent.putExtra("title", "Contacts");
 			startActivity(intent);
 			return true;
 		} else if (id == R.id.action_settings) {
 			Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+			startActivity(intent);
+			return true;
+		} else if (id == R.id.action_status) {
+			Intent intent = new Intent(getApplicationContext(), StatusActivity.class);
 			startActivity(intent);
 			return true;
 		}

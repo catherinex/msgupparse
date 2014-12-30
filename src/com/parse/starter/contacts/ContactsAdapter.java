@@ -1,3 +1,7 @@
+/*
+ * Select contact
+ */
+
 package com.parse.starter.contacts;
 
 import java.util.List;
@@ -59,7 +63,11 @@ public class ContactsAdapter extends ArrayAdapter<ParseUser> {
 	}
 	
 	private void setupItem(final ContactHolder holder) {
-		holder.name.setText(holder.contact.getUsername());
+		String nickname = holder.contact.getString("nickname");
+		if (nickname != null && !nickname.equals(""))
+			holder.name.setText(nickname);
+		else
+			holder.name.setText(holder.contact.getUsername());
 	}
 
 }
