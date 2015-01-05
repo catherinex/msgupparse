@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    
+    <ImageView 
+        android:id="@+id/iv_chats_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/default_photo"/>
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+    	android:paddingLeft="@dimen/activity_horizontal_margin"
+    	android:paddingRight="@dimen/activity_horizontal_margin">
+        
+        <TextView 
+            android:id="@+id/tv_chats_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+        
+        <TextView 
+            android:id="@+id/tv_chats_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_chats_contact"
+            android:singleLine="true"/>
+        
+        <TextView 
+            android:id="@+id/tv_chats_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/tv_chats_contact"/>
+        
+    </RelativeLayout>
+    
+
+</LinearLayout>

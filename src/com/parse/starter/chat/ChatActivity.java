@@ -22,6 +22,7 @@ import com.parse.starter.database.MessageDatasource;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -43,6 +44,7 @@ public class ChatActivity extends Activity {
 	
 	private ParseUser currentUser = ParseUser.getCurrentUser();
 	private ParseUser contact;
+	private ParseObject chat;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,33 +53,94 @@ public class ChatActivity extends Activity {
 		ibIcon = (ImageButton)findViewById(R.id.ib_icon);
 		etInput = (EmojiconEditText)findViewById(R.id.et_chat_input);
 		rlChat = (RelativeLayout)findViewById(R.id.rl_chat);
+		lvChat = (ListView)findViewById(R.id.lv_chat);
+		
+		ibSend = (ImageButton)findViewById(R.id.ib_send);
 		
 		final ActionBar actionBar = getActionBar();
 		actionBar.setIcon(R.drawable.default_photo);
 		
-		String objectId = getIntent().getStringExtra("contact");
-		ParseQuery<ParseUser> query = ParseUser.getQuery();
-		query.getInBackground(objectId, new GetCallback<ParseUser>() {
+		// continue to chat
+		String chatId = getIntent().getStringExtra("chat_id");
+		if (chatId != null) {
+			ParseQuery.getQuery("Chat").getInBackground(chatId, new GetCallback<ParseObject>() {
+
+				@Override
+				public void done(ParseObject poChat, ParseException e) {
+					if (e == null) {
+						chat = poChat;
+						
+						// set action bar title
+						chat.getParseUser("user1")
+						.fetchInBackground(new GetCallback<ParseUser>() {
+
+							@Override
+							public void done(ParseUser user, ParseException e) {
+								if (user == currentUser) {
+									chat.getParseUser("user2").fetchInBackground(new GetCallback<ParseUser>() {
+
+										@Override
+										public void done(ParseUser user2,
+												ParseException e) {
+											contact = user2;
+											actionBar.setTitle(getContactDisplayName(contact));
+										}
+										
+									});
+								} else {
+									contact = user;
+									actionBar.setTitle(getContactDisplayName(contact));
+								}
+							}
+							
+						});
+						
+						// set list view
+						final ArrayList<String> chatList = new ArrayList<String>();
+							ParseQuery<ParseObject> query = ParseQuery.getQuery("Message");
+							query.whereEqualTo("chat", chat);
+							query.orderByAscending("createdAt");
+							query.findInBackground(new FindCallback<ParseObject>() {
+
+								@Override
+								public void done(List<ParseObject> messages, ParseException e) {
+									for (ParseObject msg : messages) {
+										chatList.add(msg.getString("text"));
+									}
+									listAdapter = new ChatAdapter(getApplicationContext(), R.layout.item_chat, chatList);
+									lvChat.setAdapter(listAdapter);
+								}
+								
+							});
+						
+					}					
+				}
+				
+			});
+		} else {
+			// new chat
+			String objectId = getIntent().getStringExtra("contact");
+			ParseQuery<ParseUser> query = ParseUser.getQuery();
+			query.getInBackground(objectId, new GetCallback<ParseUser>() {
 
 			@Override
 			public void done(ParseUser user, ParseException e) {
 				if (e == null) {
-					contact = user;
-					String name = user.getString("nickname");
-					if (name == null || name.equals(""))
-						name = user.getUsername();
-					actionBar.setTitle(name);
+					contact = user;					
+					actionBar.setTitle(getContactDisplayName(user));
 				}
 					
 			}
-		});
+			});
+			
+			// set list view
+			ArrayList<String> chatList = new ArrayList<String>();
+			listAdapter = new ChatAdapter(this, R.layout.item_chat, chatList);
+			lvChat.setAdapter(listAdapter);
+		}
+				
 		
-		lvChat = (ListView)findViewById(R.id.lv_chat);
-		ArrayList<String> chatList = new ArrayList<String>();
-		listAdapter = new ChatAdapter(this, R.layout.item_chat, chatList);
-		lvChat.setAdapter(listAdapter);
 		
-		ibSend = (ImageButton)findViewById(R.id.ib_send);
 		ibSend.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -90,6 +153,11 @@ public class ChatActivity extends Activity {
 					createNewChatIfNotExists(content);
 					// 3 - clear input text box
 					etInput.setText("");
+					// 4 - prepare json string
+					Intent returnIntent = new Intent();
+					returnIntent.putExtra("chat_id",chat.getObjectId());
+					setResult(RESULT_OK,returnIntent);
+
 				}
 					
 			}
@@ -150,6 +218,13 @@ public class ChatActivity extends Activity {
 			}
 			
 		});
+	}
+	
+	private String getContactDisplayName(ParseUser user) {
+		String name = user.getString("nickname");
+		if (name == null || name.equals(""))
+			name = user.getUsername();
+		return name;
 	}
 	
 	private void createNewMessage(ParseObject chat, String content) {
