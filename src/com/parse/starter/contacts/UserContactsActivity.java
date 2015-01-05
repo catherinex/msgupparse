@@ -32,6 +32,7 @@ public class UserContactsActivity extends Activity {
 	
 	private Button btnAdd;
 	private List<ParseUser> contacts;
+	private String subtitle = "0 contact";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +40,13 @@ public class UserContactsActivity extends Activity {
 		setContentView(R.layout.activity_user_contacts);
 		
 		int isVisible = getIntent().getIntExtra("is_visible", View.INVISIBLE);
+		final boolean ifChat = getIntent().getBooleanExtra("if_chat", false);
 		String title = getIntent().getStringExtra("title");
 		
 		final ActionBar actionBar = getActionBar();
 		actionBar.setTitle(title);
 				
-		ParseUser currentUser = ParseUser.getCurrentUser();
+		final ParseUser currentUser = ParseUser.getCurrentUser();
 		ParseRelation<ParseUser> relation = currentUser.getRelation("contacts");
 		ParseQuery<ParseUser> query = relation.getQuery();
 		query.findInBackground(new FindCallback<ParseUser>() {
@@ -53,22 +55,40 @@ public class UserContactsActivity extends Activity {
 			public void done(List<ParseUser> objects, ParseException e) {
 				if (e == null) {
 					contacts = objects;
-					String subtitle = "0 contact";
-					if (contacts != null && contacts.size() > 0) {
-						if (contacts.size() == 1)
-							subtitle = "1 contact";
-						else
-							subtitle = Integer.toString(contacts.size()) + " contacts";
-					}
-					actionBar.setSubtitle(subtitle);
 					
-					// load fragment
-					Fragment newFrg = new ContactsFragment().newInstance(getApplicationContext(), objects);
-		        	Fragment frg = getFragmentManager().findFragmentByTag("fragment_user_contacts");
-		        	FragmentTransaction ft = getFragmentManager().beginTransaction();
-		        	if (frg != null)
-						ft.remove(frg);
-		        	ft.add(R.id.container_user_contacts, newFrg, "fragment_user_contacts").commit();
+					ParseQuery<ParseUser> query = ParseUser.getQuery();
+					query.whereEqualTo("contacts", currentUser);
+					query.findInBackground(new FindCallback<ParseUser>() {
+
+						@Override
+						public void done(List<ParseUser> users,
+								ParseException e) {
+							if (e == null) {
+								if (users != null && users.size() > 0) {
+									for (ParseUser user : users)
+										contacts.add(user);
+								}
+								
+								if (contacts != null && contacts.size() > 0) {
+									if (contacts.size() == 1)
+										subtitle = "1 contact";
+									else
+										subtitle = Integer.toString(contacts.size()) + " contacts";
+								}
+								actionBar.setSubtitle(subtitle);
+								
+								// load fragment
+								Fragment newFrg = new ContactsFragment().newInstance(getApplicationContext(), contacts, ifChat);
+					        	Fragment frg = getFragmentManager().findFragmentByTag("fragment_user_contacts");
+					        	FragmentTransaction ft = getFragmentManager().beginTransaction();
+					        	if (frg != null)
+									ft.remove(frg);
+					        	ft.add(R.id.container_user_contacts, newFrg, "fragment_user_contacts").commit();
+							}
+						}
+						
+					});
+					
 				}
 					
 			}

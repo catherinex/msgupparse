@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.parse.starter.chat.ChatActivity" >
+
+    <ListView 
+            android:id="@+id/lv_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rl_chat">
+            
+        </ListView>
+    
+    <RelativeLayout
+        android:id="@+id/rl_chat"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
+            android:background="?android:attr/dividerVertical"
+            android:layout_alignParentTop="true"/>
+        
+        <ImageButton 
+            android:id="@+id/ib_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/smiley_happy"
+            android:scaleType="centerCrop"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="8dp"/>
+	
+        <github.ankushsachdeva.emojicon.EmojiconEditText
+            android:id="@+id/et_chat_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/ib_send"
+            android:layout_toRightOf="@+id/ib_icon"
+            />
+        
+        <ImageButton 
+            android:id="@+id/ib_send"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_action_send_now"
+            android:background="?android:attr/selectableItemBackground"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

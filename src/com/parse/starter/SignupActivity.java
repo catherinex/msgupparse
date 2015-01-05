@@ -3,6 +3,7 @@ package com.parse.starter;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.parse.starter.chat.ChatsActivity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;

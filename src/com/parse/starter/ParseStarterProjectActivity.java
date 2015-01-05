@@ -16,6 +16,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 import com.parse.ParseException;
+import com.parse.starter.chat.ChatsActivity;
 
 public class ParseStarterProjectActivity extends Activity {
 	

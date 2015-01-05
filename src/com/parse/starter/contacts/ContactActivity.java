@@ -2,7 +2,6 @@ package com.parse.starter.contacts;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.ParseQuery;
@@ -58,18 +57,23 @@ public class ContactActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				ParseUser currentUser = ParseUser.getCurrentUser();
+				// add relation to current user
+				final ParseUser currentUser = ParseUser.getCurrentUser();
 				ParseRelation<ParseUser> relation = currentUser.getRelation("contacts");
 				relation.add(contact);
 				currentUser.saveInBackground(new SaveCallback() {
 
 					@Override
 					public void done(ParseException e) {
-						if (e == null)
+						if (e == null) {
 							finish();
+						}
+							
 					}
 					
 				});
+				
+				
 			}
 		});
 		

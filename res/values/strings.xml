@@ -19,5 +19,6 @@
     <string name="title_activity_contact">Contact info</string>
     <string name="title_activity_status">Status</string>
     <string name="title_activity_new_status">Add new status</string>
+    <string name="title_activity_chat">Chat</string>
 
 </resources>

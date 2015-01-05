@@ -5,6 +5,7 @@ import java.util.List;
 import com.parse.ParseUser;
 
 import com.parse.starter.R;
+import com.parse.starter.chat.ChatActivity;
 import com.parse.starter.settings.UserActivity;
 
 import android.app.ListFragment;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 public class ContactsFragment extends ListFragment {
 	private Context context;
 	private List<ParseUser> contacts;
+	private boolean ifChat = false;
 	
 	public void setContext(Context context) {
 		this.context = context;
@@ -26,10 +28,23 @@ public class ContactsFragment extends ListFragment {
 		this.contacts = contacts;
 	}
 	
+	public void setIfChat(boolean ifChat) {
+		this.ifChat = ifChat;
+	}
+	
 	public static ContactsFragment newInstance(Context context, List<ParseUser> contacts) {
 		ContactsFragment fragment = new ContactsFragment();	    
 		fragment.setContext(context);
 		fragment.setTourList(contacts);
+		return fragment;
+	}
+	
+	public static ContactsFragment newInstance(Context context, List<ParseUser> contacts
+			, boolean ifChat) {
+		ContactsFragment fragment = new ContactsFragment();	    
+		fragment.setContext(context);
+		fragment.setTourList(contacts);
+		fragment.setIfChat(ifChat);
 		return fragment;
 	}
 	
@@ -44,8 +59,15 @@ public class ContactsFragment extends ListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		ParseUser user = (ParseUser)l.getItemAtPosition(position);
-		Intent intent = new Intent(context, ContactActivity.class);
-		intent.putExtra("contact", user.getObjectId());
-		startActivity(intent);
+		if (ifChat) {
+			Intent intent = new Intent(context, ChatActivity.class);
+			intent.putExtra("contact", user.getObjectId());
+			startActivity(intent);
+		} else {
+			Intent intent = new Intent(context, ContactActivity.class);
+			intent.putExtra("contact", user.getObjectId());
+			startActivity(intent);
+		}
+		
 	}
 }
