@@ -4,7 +4,6 @@
 
 package com.parse.starter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.parse.FindCallback;
@@ -22,11 +21,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ContactsActivity extends Activity {
 	
 	private ImageView ivSearch;
 	private EditText etSearch;
+	private TextView tvMy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,10 @@ public class ContactsActivity extends Activity {
 		
 		etSearch = (EditText)findViewById(R.id.et_contacts_search);
 		ivSearch = (ImageView)findViewById(R.id.iv_contacts_search);
+		tvMy = (TextView)findViewById(R.id.tv_contacts_my);
+		
+		tvMy.setText("My username: " + ParseUser.getCurrentUser().getUsername());
+		
 		ivSearch.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

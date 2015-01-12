@@ -49,7 +49,6 @@ public class ParseStarterProjectActivity extends Activity {
 							  public void done(ParseUser user, ParseException e) {
 							    if (user != null) {
 							      // Hooray! The user is logged in.
-							    	GlobalData.currentUser = user;
 							    	Intent intent = new Intent(getApplicationContext(), ChatsActivity.class);
 									startActivity(intent);
 									finish();

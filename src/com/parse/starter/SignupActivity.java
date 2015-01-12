@@ -4,8 +4,8 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import com.parse.starter.chat.ChatsActivity;
+import com.parse.starter.settings.UserActivity;
 
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,7 +50,9 @@ public class SignupActivity extends Activity {
 				  public void done(ParseException e) {
 				    if (e == null) {
 				      // Hooray! Let them use the app now.
-				    	Intent intent = new Intent(getApplicationContext(), ChatsActivity.class);
+				    	//Intent intent = new Intent(getApplicationContext(), ChatsActivity.class);
+				    	Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+				    	intent.putExtra("is_visible", View.VISIBLE);
 						startActivity(intent);
 						finish();
 				    } else {

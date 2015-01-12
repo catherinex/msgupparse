@@ -19,7 +19,6 @@
         android:id="@+id/tv_chats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tap and hold on a chat for more options"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/activity_vertical_margin"/>
 

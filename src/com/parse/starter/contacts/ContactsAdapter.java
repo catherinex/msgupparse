@@ -68,6 +68,7 @@ public class ContactsAdapter extends ArrayAdapter<ParseUser> {
 			holder.name.setText(nickname);
 		else
 			holder.name.setText(holder.contact.getUsername());
+		holder.status.setText(holder.contact.getString("status"));
 	}
 
 }

@@ -5,8 +5,11 @@
 package com.parse.starter.settings;
 
 import com.parse.ParseUser;
+import com.parse.starter.ContactsActivity;
 import com.parse.starter.GlobalData;
 import com.parse.starter.R;
+import com.parse.starter.chat.ChatsActivity;
+import com.parse.starter.contacts.UserContactsActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -65,6 +68,16 @@ public class UserActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				onClickNameEditButton();
+			}
+		});
+		
+		btnStart.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplicationContext(), ChatsActivity.class);
+				startActivity(intent);
+				finish();
 			}
 		});
 	}

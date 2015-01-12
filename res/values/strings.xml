@@ -12,7 +12,7 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
-    <string name="title_activity_contacts">ContactsActivity</string>
+    <string name="title_activity_contacts">New contact</string>
     <string name="title_activity_user">UserActivity</string>
     <string name="title_activity_name">Enter your name</string>
     <string name="title_activity_user_contacts">Select contact</string>
@@ -20,5 +20,6 @@
     <string name="title_activity_status">Status</string>
     <string name="title_activity_new_status">Add new status</string>
     <string name="title_activity_chat">Chat</string>
+    <string name="title_activity_group">New group</string>
 
 </resources>

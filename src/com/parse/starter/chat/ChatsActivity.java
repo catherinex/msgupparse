@@ -9,8 +9,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.starter.R;
-import com.parse.starter.contacts.ContactsFragment;
 import com.parse.starter.contacts.UserContactsActivity;
+import com.parse.starter.group.GroupActivity;
 import com.parse.starter.settings.UserActivity;
 import com.parse.starter.status.StatusActivity;
 
@@ -33,7 +33,6 @@ public class ChatsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chats);
 		tvHint = (TextView)findViewById(R.id.tv_chats);
-		tvHint.setVisibility(View.INVISIBLE);
 		
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		ParseQuery<ParseObject> query1 = ParseQuery.getQuery("Chat");
@@ -55,7 +54,10 @@ public class ChatsActivity extends Activity {
 		        	if (frg != null)
 						ft.remove(frg);
 		        	ft.add(R.id.container_chats, newFrg, "fragment_chats").commit();
-		        	tvHint.setVisibility(View.VISIBLE);
+		        	if (chats == null || chats.size() == 0)
+		        		tvHint.setText("Select a contact to start a chat");
+		        	else
+		        		tvHint.setText("Tap and hold on a chat for more options");
 				}
 					
 			}
@@ -82,6 +84,9 @@ public class ChatsActivity extends Activity {
 			intent.putExtra("if_chat", true);
 			startActivity(intent);
 			return true;
+		} else if (id == R.id.action_new_group) {
+			Intent intent = new Intent(getApplicationContext(), GroupActivity.class);
+			startActivity(intent);
 		} else if (id == R.id.action_contacts) {
 			Intent intent = new Intent(getApplicationContext(), UserContactsActivity.class);
 			intent.putExtra("is_visible", View.VISIBLE);

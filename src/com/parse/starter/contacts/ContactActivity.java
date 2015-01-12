@@ -1,5 +1,8 @@
 package com.parse.starter.contacts;
 
+import java.util.List;
+
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseRelation;
@@ -24,6 +27,7 @@ public class ContactActivity extends Activity {
 	private TextView tvNickname, tvUsername, tvStatus;
 	private ParseUser contact;
 	private Button btnFollow;
+	private ParseUser currentUser = ParseUser.getCurrentUser();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,8 @@ public class ContactActivity extends Activity {
 		tvUsername = (TextView)findViewById(R.id.tv_contact_username);
 		tvStatus = (TextView)findViewById(R.id.tv_contact_status);
 		btnFollow = (Button)findViewById(R.id.btn_contact_follow);
+		
+		btnFollow.setVisibility(View.INVISIBLE);
 		
 		String objectId = getIntent().getStringExtra("contact");
 		ParseQuery<ParseUser> query = ParseUser.getQuery();
@@ -48,10 +54,47 @@ public class ContactActivity extends Activity {
 					tvUsername.setText(contact.getUsername());
 					if (status != null)
 						tvStatus.setText(status);
+					
+					// check if this user is already one of contacts
+					
+					ParseRelation<ParseUser> relation = currentUser.getRelation("contacts");
+					ParseQuery<ParseUser> query2 = relation.getQuery();
+					query2.findInBackground(new FindCallback<ParseUser>() {
+
+						@Override
+						public void done(List<ParseUser> objects, ParseException e) {
+							if (objects.size() > 0 && objects.contains(contact)) {
+								btnFollow.setText("Chat");
+							} else {
+								ParseQuery<ParseUser> query = ParseUser.getQuery();
+								query.whereEqualTo("contacts", currentUser);
+								query.findInBackground(new FindCallback<ParseUser>() {
+
+									@Override
+									public void done(List<ParseUser> objects,
+											ParseException e) {
+										if (objects.size() > 0) {
+											for (ParseUser pu : objects) {
+												if (pu.getObjectId().equals(contact.getObjectId())) {
+													btnFollow.setText("Chat");
+													break;
+												}
+											}
+										}
+										btnFollow.setVisibility(View.VISIBLE);	
+									}
+									
+								});
+							}
+						}
+						
+					});
 				}
 					
 			}
 		});
+		
+		
 		
 		btnFollow.setOnClickListener(new View.OnClickListener() {
 			

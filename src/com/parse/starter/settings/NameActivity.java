@@ -58,7 +58,7 @@ public class NameActivity extends Activity {
 		btnIcon.setScaleType(ScaleType.CENTER_CROP);
 		ll.addView(btnIcon);
 		
-		String name = GlobalData.currentUser.getString("nickname");
+		String name = ParseUser.getCurrentUser().getString("nickname");
 		
 		btnIcon.setOnClickListener(new View.OnClickListener() {
 			
