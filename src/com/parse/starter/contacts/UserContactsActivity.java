@@ -11,7 +11,6 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
-import com.parse.starter.ContactsActivity;
 import com.parse.starter.R;
 import com.parse.starter.R.id;
 import com.parse.starter.R.layout;

@@ -63,8 +63,15 @@ public class ContactActivity extends Activity {
 
 						@Override
 						public void done(List<ParseUser> objects, ParseException e) {
-							if (objects.size() > 0 && objects.contains(contact)) {
-								btnFollow.setText("Chat");
+							if (objects.size() > 0) {
+								for (ParseUser pu : objects) {
+									if (pu.getObjectId().equals(contact.getObjectId())) {
+										btnFollow.setText("Chat");
+										break;
+									}
+										
+								}
+								
 							} else {
 								ParseQuery<ParseUser> query = ParseUser.getQuery();
 								query.whereEqualTo("contacts", currentUser);
@@ -81,11 +88,12 @@ public class ContactActivity extends Activity {
 												}
 											}
 										}
-										btnFollow.setVisibility(View.VISIBLE);	
+											
 									}
 									
 								});
 							}
+							btnFollow.setVisibility(View.VISIBLE);
 						}
 						
 					});

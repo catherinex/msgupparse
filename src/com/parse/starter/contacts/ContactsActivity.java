@@ -2,7 +2,7 @@
  * Add contacts
  */
 
-package com.parse.starter;
+package com.parse.starter.contacts;
 
 import java.util.List;
 
@@ -10,7 +10,10 @@ import com.parse.FindCallback;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.ParseException;
-import com.parse.starter.contacts.ContactsFragment;
+import com.parse.starter.R;
+import com.parse.starter.R.id;
+import com.parse.starter.R.layout;
+import com.parse.starter.R.menu;
 
 import android.app.Activity;
 import android.app.Fragment;
